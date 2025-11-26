@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>{{ product.name }}</h1>
+<p>{{ product.description }}</p>
+<p>Price: {{ product.price }}</p>
+<a href="{% url 'add_review' product.id %}">Change Review</a>
+{% if reviews %}
+  <h2>Reviews:</h2>
+  <ul>
+    {% for review in reviews %}
+      <li>
+        <strong>{{ review.user.username }}</strong> - {{ review.created_at|date:'F j, Y' }} - {{ review.rating }} stars<br>
+        {{ review.text }}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No reviews yet.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-6">
+      <img src="{{ object.image.url }}" class="img-fluid">
+    </div><br>
+    <div class="col-md-6">
+      <h1>{{ object.name }}</h1>
+      <p>{{ object.description }}</p>
+      <p>Price: {{ object.price }}</p>
+      
+    </div>
+  </div>
+{% endblock %}

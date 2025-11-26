@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+{% if messages %}
+	{% for message in messages %}
+	<div class="alert alert-success" role="alert">
+		{{message}}
+	  </div>
+	  {% endfor %}
+	  {% endif %}
+<div class="row">
+	{% if products %}
+	{% for product in products %}
+	<div class="col-lg-4">
+		<img class="thumbnail" src="{{product.imageURL}}">
+		<div class="box-element product">
+			<h6><strong>{{product.name}}</strong></h6>
+			<p>{{ product.description }}</p>
+            <p>{{ product.price }}</p>
+        <a href="{% url 'add_review' product.id %}">Add a review</a>
+        <h3>Reviews</h3>
+        <ul>
+            {% for review in reviews %}
+                {% if review.product == product %}
+                    <li>{{ review.text }} ({{ review.rating }})</li>
+                {% endif %}
+            {% endfor %}
+			<hr>
+
+			<a href="{% url 'add_item' product.id %}"><button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button></a>
+			<a href="{% url 'product_view' pk=product.pk %}">
+				<button type="button" class="btn btn-primary">View</button>
+			  </a>
+			<h4 style="display: inline-block; float:right" ><strong>Ksh{{product.price}}</strong></h4>
+			
+			
+        </ul>
+		</div>
+	</div>
+	{% endfor %}
+    {% else %}
+    <center><div class="alert alert-warning" role="alert">
+        No products found in this Category!!
+      </div></center>
+    {% endif %}
+</div>
+	
+
+{% endblock content %}

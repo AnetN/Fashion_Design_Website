@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% if request.user.is_customer %}
+<!-- AppointmentThing.com widget (begin) -->
+<div class="apptthingbtn-t1"><a href="https://appointmentthing.com" title="Schedule Appointment" class="apptthinglnk" target="_blank" data-appt-url="beauty_appointments" data-appt-types="af20389,Nu20399,LX20439,VQ20440,QP20441" data-page-text="000000" data-page-link="0f5cff" data-page-details="true" data-emb-num="2" onclick="apptthing.widgetpopup(this);return false;" style="background:#006eff;color:#ffffff;">Schedule Appointment <i class="material-icons" style="color:#ffffff;">access_time</i></a></div>
+<link rel="stylesheet" href="https://appointmentthing.com/css/meeting.embed.t1.css" type="text/css" media="all" /><script src="https://appointmentthing.com/js/meeting.embed.t1.init.js" type="text/javascript" async defer></script>
+<!-- AppointmentThing.com widget (end) -->
+{% endif %}
+
+ {% if request.user.is_vendor %}
+
+    <table class="table" id="myTable">
+        <thead>
+          <tr>
+            <th scope="col" hidden>appointment ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Check in date</th>
+            <th scope="col">Check out date</th>
+            <th scope="col">Status</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            {% for data1 in data %}
+            {% for x in data1 %}
+          <tr>
+            <th scope="row" hidden>{{x.appointment_id}}</th>
+            <td>{{x.user_name}}</td>
+            <td>{{x.user_email}}</td>
+            <td>{{x.date_start}}</td>
+            <td>{{x.date_end}}</td>
+            {% if x.status == "1" %}
+            <td><button class="btn btn-success">active</button></td>
+            {% else %}
+            <td><button class="btn btn-danger">cancelled</button></td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+          {% endfor %}
+        </tbody>
+      </table>
+     
+ {% endif %}   
+{% endblock %}
+
+
+

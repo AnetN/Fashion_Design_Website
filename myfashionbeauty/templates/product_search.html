@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  <h1>Search Results for "{{ query }}"</h1>
+  {% if products %}
+    <ul>
+    {% for product in products %}
+      <li><a href="{% url 'product_view' pk=product.pk %}">{{ product.name }}</a></li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>No products found.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Payment</title></titleP></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style type="text/css">
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        /* Close button styles */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body onload="showModal()">
+    <!-- Edit User Form -->
+    <div id="edit-user-form" class="modal">
+        
+        <div class="modal-content">
+            <a href="{% url 'checkout' %}"><span class="close" onclick="closeModal()">&times;</span></a>
+            <center>
+                <h2>Payment</h2>
+            </center>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- form fields go here -->
+                
+                <div class="form-group">
+                    <label for="">Mpesa Number</label>
+                    <input type="text" name="number" id="" required class="form-control" placeholder="eg 2547xxxx">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="">Amount</label>
+                    <input type="number" name="amount" id="" required class="form-control" value="{{order}}" >
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Pay</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript to show/hide the modal -->
+    <script type="text/javascript">
+        function showModal() {
+            document.getElementById('edit-user-form').style.display = 'block';
+        }
+        function closeModal() {
+            document.getElementById('edit-user-form').style.display = 'none';
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

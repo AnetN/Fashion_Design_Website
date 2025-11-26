@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+	<div style="clear: both;">
+		<a href="{% url 'add_product' %}" class="btn btn-primary">Add Product</a>
+	  </div> 
+	  
+	  <div class="row">  
+	{% for product in products %}
+	<div class="col-lg-4">
+		<img class="thumbnail" src="{{product.imageURL}}">
+		<div class="box-element product">
+			<h6><strong></strong></h6>
+			<hr>
+            
+			<a href="{% url 'edit_product' product.id %}" class="btn btn-outline-secondary">Edit product</a>
+			<a class="btn btn-outline-success" href="{% url 'delete_product' product.id %}">delete</a>
+			<h4 style="display: inline-block; float:right"><strong>Ksh{{product.price}}</strong></h4>
+
+		</div>
+	</div>
+	{% endfor %}
+</div>
+	
+
+{% endblock content %}

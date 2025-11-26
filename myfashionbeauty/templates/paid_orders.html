@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>Order Details</h1>
+<p>Order ID: {{ order.id }}</p>
+<p>Date Ordered: {{ order.date_ordered }}</p>
+<p>Customer: {{ order.customer }}</p>
+<p>Complete: {{ order.complete }}</p>
+<p>Paid: {{ order.paid }}</p>
+<p>Transaction ID: {{ order.transaction_id }}</p>
+
+<h2>Order Items</h2>
+<form method="post" action="{% url 'order_delivered' order.id %}">
+  {% csrf_token %}
+      
+  {% if not order.complete %}
+    <a href="{% url 'order_delivered' order.id %}"><button type="submit" class="btn btn-primary">Confirm delivery</button></a>
+  {% else %}
+  <a href=""><button type="submit" class="btn btn-secondary" disabled>Confirm delivery</button></a>
+  {% endif %}
+</form>
+
+{% endblock %}
